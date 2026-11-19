@@ -1,29 +1,15 @@
 `timescale 1ns/1ps
 
-// Testbench for top. Clock is 40 ns (25 MHz), first rising edge at 20 ns.
-//
-// Expected behaviour, worked out by hand (not from the RTL):
-//   rising edges are numbered 1, 2, 3, ...
-//   led flips only on edges N, 2N, 3N, ...   (N = HALF_PERIOD_CYCLES)
-//   so after edge n, led should be floor(n / N) mod 2
-//   N=7 -> flips on edges 7, 14, 21, ... -> t = 260, 540, 820 ns ...
-//   N=6 -> flips on edges 6, 12, 18, ... -> t = 220, 460, 700 ns ...
-//   N=1 -> flips on every edge
-//
-// Checks:
-//   - led is 0 after time-zero init, before the first edge
-//   - led matches the expected value 1 ps after every rising edge
-//   - led never changes except right on a rising edge (catches glitches)
-//   - no X/Z on led after init
-//   - total number of toggles is right
-//   - separate timeout in case the sim hangs
+// tb for top, 40ns clock (first rising edge at 20ns)
+// led should flip on edges N, 2N, 3N... so after edge n led = (n/N) % 2
+// e.g. N=7 -> edges 7, 14, 21 -> 260, 540, 820 ns
 
 module tb_top #(
     parameter int HALF_PERIOD_CYCLES = 7
 );
 
     localparam int NUM_TOGGLES = 6;
-    // go N-1 edges past the last toggle so an extra/early toggle would show up
+    // run a bit past the last toggle so an extra one would get caught
     localparam int TOTAL_EDGES = HALF_PERIOD_CYCLES * (NUM_TOGGLES + 1) - 1;
     localparam int TIMEOUT_NS  = (TOTAL_EDGES + 10) * 40;
 

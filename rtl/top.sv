@@ -1,6 +1,5 @@
-// LED blinker for the ULX3S (ECP5, 25 MHz clock).
-// led flips every HALF_PERIOD_CYCLES rising edges of clk_25mhz.
-// Default 12_500_000 -> 0.5 s on, 0.5 s off at 25 MHz.
+// led blinker, flips led every HALF_PERIOD_CYCLES clock edges
+// 12.5M @ 25MHz = 0.5s on / 0.5s off
 
 `timescale 1ns/1ps
 
@@ -11,14 +10,9 @@ module top #(
     output logic led
 );
 
-    // counter goes 0 .. HALF_PERIOD_CYCLES-1, so ceil(log2(N)) bits is enough.
-    // N=1 would give a 0-bit counter, keep at least 1 bit.
+    // $clog2(1) is 0 so force at least 1 bit
     localparam int unsigned CNT_W = (HALF_PERIOD_CYCLES > 1) ? $clog2(HALF_PERIOD_CYCLES) : 1;
     localparam logic [CNT_W-1:0] CNT_MAX = CNT_W'(HALF_PERIOD_CYCLES - 1);
-
-    if (HALF_PERIOD_CYCLES < 1) begin : g_bad_param
-        initial $fatal(1, "HALF_PERIOD_CYCLES must be >= 1");
-    end
 
     logic [CNT_W-1:0] count = '0;
     logic             led_q = 1'b0;

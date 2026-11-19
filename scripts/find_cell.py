@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
-"""Print cells of a given type from build/top.json with their ports mapped to net names.
-
-usage: scripts/find_cell.py TRELLIS_FF [max]
-"""
+# prints cells of one type from build/top.json and what nets their ports connect to
+# usage: python3 scripts/find_cell.py TRELLIS_FF [how many]
 import json
 import sys
 
@@ -12,9 +10,9 @@ limit = int(sys.argv[2]) if len(sys.argv) > 2 else 3
 with open("build/top.json") as f:
     mod = json.load(f)["modules"]["top"]
 
-# bit number -> net name (first name wins, skip yosys-internal $ names if possible)
+# map bit ids to net names
 names = {}
-for name, net in sorted(mod["netnames"].items(), key=lambda kv: kv[0].startswith("$")):
+for name, net in mod["netnames"].items():
     for i, bit in enumerate(net["bits"]):
         if isinstance(bit, int) and bit not in names:
             names[bit] = name if len(net["bits"]) == 1 else f"{name}[{i}]"

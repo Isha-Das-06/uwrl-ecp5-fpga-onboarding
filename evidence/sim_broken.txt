@@ -1,16 +1,16 @@
 $ scripts/break_test.sh early
-broken (early): localparam logic [CNT_W-1:0] CNT_MAX = CNT_W'(HALF_PERIOD_CYCLES - 2);
+    localparam logic [CNT_W-1:0] CNT_MAX = CNT_W'(HALF_PERIOD_CYCLES - 2);
 VCD info: dumpfile build/blink.vcd opened for output.
 HALF_PERIOD_CYCLES = 7, expecting led flips on edges 7, 14, 21, ... (48 edges total)
-FATAL: sim/tb_top.sv:60: led toggled on edge 6 at   220.000 ns, should only toggle on multiples of 7
+FATAL: sim/tb_top.sv:46: led toggled on edge 6 at   220.000 ns, should only toggle on multiples of 7
        Time: 220000  Scope: tb_top
-testbench caught it (vvp exit 1)
+exit code 1
 
 $ scripts/break_test.sh late
-broken (late): localparam logic [CNT_W-1:0] CNT_MAX = CNT_W'(HALF_PERIOD_CYCLES);
+    localparam logic [CNT_W-1:0] CNT_MAX = CNT_W'(HALF_PERIOD_CYCLES);
 VCD info: dumpfile build/blink.vcd opened for output.
 HALF_PERIOD_CYCLES = 7, expecting led flips on edges 7, 14, 21, ... (48 edges total)
-FATAL: sim/tb_top.sv:87: edge 7 (  260.001 ns): led = 0, expected 1
+FATAL: sim/tb_top.sv:73: edge 7 (  260.001 ns): led = 0, expected 1
        Time: 260001  Scope: tb_top.$ivl_for_loop0
-testbench caught it (vvp exit 1)
+exit code 1
 

@@ -1,4 +1,4 @@
-$ python3 scripts/find_cell.py TRELLIS_FF 30   (just the led flip-flop and one counter bit)
+$ python3 scripts/find_cell.py TRELLIS_FF 30  (led ff + count[0])
 TRELLIS_FF  count_TRELLIS_FF_Q_2
     param CEMUX = 1 
     param CLKMUX = CLK
@@ -41,12 +41,3 @@ CCU2C  count_TRELLIS_FF_Q_12_DI_CCU2C_S1
     input  D1    -> const 1
     output S0    -> count_TRELLIS_FF_Q_12_DI_CCU2C_S1_S0
     output S1    -> count_TRELLIS_FF_Q_12_DI
-
-$ python3 scripts/find_cell.py LUT4 30   (led inverter)
-LUT4  led_q_LUT4_D
-    param INIT = 0000000011111111
-    input  A     -> const 0
-    input  B     -> const 0
-    input  C     -> const 0
-    input  D     -> led
-    output Z     -> led_q_LUT4_D_Z
