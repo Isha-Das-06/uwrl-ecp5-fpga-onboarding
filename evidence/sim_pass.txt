@@ -1,0 +1,18 @@
+$ scripts/sim.sh 7
+VCD info: dumpfile build/blink.vcd opened for output.
+HALF_PERIOD_CYCLES = 7, expecting led flips on edges 7, 14, 21, ... (48 edges total)
+PASS: HALF_PERIOD_CYCLES = 7, 48 edges checked, 6 toggles
+sim/tb_top.sv:94: $finish called at 1900001 (1ps)
+
+$ scripts/sim.sh 6
+VCD info: dumpfile build/blink.vcd opened for output.
+HALF_PERIOD_CYCLES = 6, expecting led flips on edges 6, 12, 18, ... (41 edges total)
+PASS: HALF_PERIOD_CYCLES = 6, 41 edges checked, 6 toggles
+sim/tb_top.sv:94: $finish called at 1620001 (1ps)
+
+$ scripts/sim.sh 1
+VCD info: dumpfile build/blink.vcd opened for output.
+HALF_PERIOD_CYCLES = 1, expecting led flips on edges 1, 2, 3, ... (6 edges total)
+PASS: HALF_PERIOD_CYCLES = 1, 6 edges checked, 6 toggles
+sim/tb_top.sv:94: $finish called at 220001 (1ps)
+
