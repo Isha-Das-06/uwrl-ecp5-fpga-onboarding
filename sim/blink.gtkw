@@ -1,0 +1,15 @@
+[*] gtkwave view for the default run (HALF_PERIOD_CYCLES = 7)
+[*] gtkwave build/blink.vcd sim/blink.gtkw
+[dumpfile] "build/blink.vcd"
+[timestart] 0
+*-23.000000 260000 540000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] tb_top.
+[treeopen] tb_top.dut.
+@28
+tb_top.clk
+@24
+tb_top.dut.count[2:0]
+@28
+tb_top.led
+[pattern_trace] 1
+[pattern_trace] 0
