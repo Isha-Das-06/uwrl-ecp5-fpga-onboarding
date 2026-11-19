@@ -1,0 +1,52 @@
+$ python3 scripts/find_cell.py TRELLIS_FF 30   (just the led flip-flop and one counter bit)
+TRELLIS_FF  count_TRELLIS_FF_Q_2
+    param CEMUX = 1 
+    param CLKMUX = CLK
+    param GSR = DISABLED
+    param LSRMUX = LSR
+    param REGSET = RESET
+    param SRMODE = LSR_OVER_CE
+    input  CLK   -> clk_25mhz
+    input  DI    -> count_TRELLIS_FF_Q_2_DI
+    input  LSR   -> led_q_TRELLIS_FF_Q_CE
+    output Q     -> count[0]
+
+TRELLIS_FF  led_q_TRELLIS_FF_Q
+    param CEMUX = CE
+    param CLKMUX = CLK
+    param GSR = DISABLED
+    param LSRMUX = LSR
+    param REGSET = RESET
+    input  CE    -> led_q_TRELLIS_FF_Q_CE
+    input  CLK   -> clk_25mhz
+    input  DI    -> led_q_LUT4_D_Z
+    input  LSR   -> const 0
+    output Q     -> led
+
+$ python3 scripts/find_cell.py CCU2C 1
+CCU2C  count_TRELLIS_FF_Q_12_DI_CCU2C_S1
+    param INIT0 = 1001011010101010
+    param INIT1 = 1001011010101010
+    param INJECT1_0 = NO
+    param INJECT1_1 = NO
+    input  A0    -> const 0
+    input  A1    -> const 0
+    input  B0    -> count[14]
+    input  B1    -> count[15]
+    input  C0    -> const 0
+    input  C1    -> const 0
+    input  CIN   -> count_TRELLIS_FF_Q_8_DI_CCU2C_S0_COUT
+    output COUT  -> count_TRELLIS_FF_Q_12_DI_CCU2C_S1_COUT
+    input  D0    -> const 1
+    input  D1    -> const 1
+    output S0    -> count_TRELLIS_FF_Q_12_DI_CCU2C_S1_S0
+    output S1    -> count_TRELLIS_FF_Q_12_DI
+
+$ python3 scripts/find_cell.py LUT4 30   (led inverter)
+LUT4  led_q_LUT4_D
+    param INIT = 0000000011111111
+    input  A     -> const 0
+    input  B     -> const 0
+    input  C     -> const 0
+    input  D     -> led
+    output Z     -> led_q_LUT4_D_Z

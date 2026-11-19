@@ -1,0 +1,35 @@
+$ scripts/synth.sh   (yosys, synth_ecp5, HALF_PERIOD_CYCLES = 12_500_000)
+
+3. Executing CHECK pass (checking for obvious problems).
+Checking module top...
+Found and reported 0 problems.
+
+4. Printing statistics.
+
+=== top ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       49 wires
+       80 wire bits
+       49 public wires
+       80 public wire bits
+        2 ports
+        2 port bits
+       50 cells
+       12   CCU2C
+       11   LUT4
+        2   PFUMX
+       25   TRELLIS_FF
+
+Warnings: 1 unique messages, 1 total
+Warnings: 1 experimental features used (not excluded with -x).
+End of script. Logfile hash: c0ba7f1389, time: 0.62s, user: 0.36s, system: 0.09s, MEM: 32.20 MB peak
+Yosys 0.69+62 (git sha1 0edda7a3a-dirty, Release, Clang /usr/bin/clang++ 21.1.8)
+Time spent: 70% 21x read_verilog (0 sec), 8% 1x abc9_exe (0 sec), ...
+
+--- warnings in build/synth.log:
+Warning: Feature 'write_xaiger2' is experimental.
+ABC: Warning: The network is combinational.
+Warnings: 1 unique messages, 1 total
+Warnings: 1 experimental features used (not excluded with -x).
